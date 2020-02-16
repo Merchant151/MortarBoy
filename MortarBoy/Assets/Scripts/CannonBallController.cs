@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CannonBallController : MonoBehaviour
 {
+    //public int pleaseShowUp;
     public GameObject exploPrefab;
 
     // Start is called before the first frame update
@@ -17,4 +18,12 @@ public class CannonBallController : MonoBehaviour
     {
         
     }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        Instantiate(exploPrefab, transform.position, transform.rotation);
+        Destroy(gameObject);
+    
+    }
+
 }
