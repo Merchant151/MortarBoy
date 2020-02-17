@@ -7,46 +7,75 @@ public class PlayerController : MonoBehaviour
     Animator anim;
     GameObject mCam;
     float cur;
-    // Start is called before the first frame update
+    CannonController cannon;
+
+    int mode = 0; //player moveing around mode
+
+
     void Start()
     {
         anim = GetComponent<Animator>();
         mCam = GameObject.Find("Main Camera");
         cur = 0;
-
+        cannon = null;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
         float move = Input.GetAxis("Vertical");
         float h = Input.GetAxis("Horizontal");
-        anim.SetFloat("Speed", move);
-        anim.SetFloat("H", h);
-        if (move < -0f)
+        if (mode == 0)
         {
-            anim.SetBool("Back", true);
-            cur += Time.deltaTime;
-            //anim.SetBool("Back", false);
-            //print("Back true");
+            anim.SetFloat("Speed", move);
+            anim.SetFloat("H", h);
+            if (move < -0f)
+            {
+                anim.SetBool("Back", true);
+                cur += Time.deltaTime;
+                //anim.SetBool("Back", false);
+                //print("Back true");
 
+            }
+            //print(cur);
+            if (anim.GetBool("Back"))
+            {
+                cur += Time.deltaTime;
+            }
+            if (cur > 1.62f)
+            {
+                cur = cur - cur;
+                anim.SetBool("Back", false);
+                //print("This is not true");
+            }
+
+            mCam.transform.position = transform.position - 5 * transform.forward + 2 * Vector3.up;
+            mCam.transform.forward = transform.forward;
         }
-        //print(cur);
-        if (anim.GetBool("Back"))
+        else if (mode == 1)
         {
-            cur += Time.deltaTime;
+            print("Cannon aiming mode" + cannon.name);
         }
-        if(cur > 1.62f )
-        {
-            cur = cur - cur;
-            anim.SetBool("Back", false);
-            //print("This is not true");
-        }
-
-        mCam.transform.position = transform.position - 5 * transform.forward + 2 * Vector3.up;
-        mCam.transform.forward = transform.forward;
-
 
     }
+        void OnTriggerStay(Collider other)
+        {
+            print("thisWorks");
+            if (other.tag == "ACannon" && mode == 0 && Input.GetButton("Jump"))
+            {
+                cannon = other.transform.Find("Cannon").GetComponent<CannonController>();
+                setAimMode();
+
+            }
+        }
+
+        void setAimMode()
+        {
+            mode = 1;
+        }
+        void setMoveMode()
+        {
+            mode = 0;
+        }
 }
