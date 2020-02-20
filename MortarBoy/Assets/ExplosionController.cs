@@ -39,11 +39,16 @@ public class ExplosionController : MonoBehaviour
         {
             EndGame();
         }
-        if((EGuns[0] == null && EGuns[1] == null && EGuns[2] == null))
-        {
-            WinGame();
+        bool win = true;
+        foreach(GameObject gun in EGuns){
+            if(gun != null)
+            {
+                end = false;
+            }
+
         }
 
+        if (win) WinGame();
         if (Input.GetKeyDown("r"))
         {
             Time.timeScale = 1;
