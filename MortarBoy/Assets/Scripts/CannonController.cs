@@ -18,6 +18,7 @@ public class CannonController : MonoBehaviour
         Rigidbody body = g.GetComponent<Rigidbody>();
         body.AddForce(transform.forward.normalized * power, ForceMode.Impulse);
         return g.GetComponent<Rigidbody>();
+        
     }
 
     // Update is called once per frame
