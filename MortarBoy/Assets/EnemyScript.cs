@@ -36,11 +36,10 @@ public class EnemyScript : MonoBehaviour
 
     void shootMortarBoy()
     {
-
         gameObject.transform.LookAt(mortarBoy.transform.position);
         gameObject.transform.Rotate(cannon.transform.right, -50, Space.World); 
         float power;
-        power = Random.Range(30, 100);
+        power = Random.Range(45, 65);
         if (!activeClock)
         {
             StartClock();
@@ -53,5 +52,5 @@ public class EnemyScript : MonoBehaviour
         activeClock = true;
         timer = 0;
     }
-
+    
 }

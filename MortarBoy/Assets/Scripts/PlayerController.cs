@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetButtonDown("Fire1"))
             {
-                cannonBall = cannon.shoot(50);
+                cannonBall = cannon.shoot(60);
                 mode = -1;
                 Invoke("setFollowing",.25f);
             }
@@ -90,6 +90,10 @@ public class PlayerController : MonoBehaviour
             else
             {
                 mode = -1;
+                if(cannon.gameObject == null)
+                {
+                    mCam.GetComponent<ExplosionController>().EndGame();
+                }
                 Invoke("setAimMode", 1);
             }
         }
@@ -112,20 +116,20 @@ public class PlayerController : MonoBehaviour
 
     void setAimMode()
     {
-        Debug.Log("cur mode: "+ mode);
+        //Debug.Log("cur mode: "+ mode);
         crossHair.enabled = true;
         mode = 1;
     }
     void setMoveMode()
     {
-        Debug.Log("cur mode: " + mode);
+       // Debug.Log("cur mode: " + mode);
         crossHair.enabled = false;
         mode = 0;
     }
 
     void setFollowing()
     {
-        Debug.Log("cur mode: " + mode);
+       // Debug.Log("cur mode: " + mode);
         crossHair.enabled = false;
         mode = 2;
     }

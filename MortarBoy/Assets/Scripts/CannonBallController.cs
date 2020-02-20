@@ -16,11 +16,19 @@ public class CannonBallController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(gameObject.transform.position.y < -100)
+        {
+            Destroy(gameObject);
+        }
     }
 
     void OnCollisionEnter(Collision collision)
     {
+        print(collision.gameObject.name);
+        if (collision.gameObject.tag == "ACannon"||collision.gameObject.tag=="ECannon"){
+            Destroy(collision.gameObject);
+        }
+
         Instantiate(exploPrefab, transform.position, transform.rotation);
         Destroy(gameObject);
     
