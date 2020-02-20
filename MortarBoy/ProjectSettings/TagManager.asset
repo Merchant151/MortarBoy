@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Fire
   - ACannon
+  - ECannon
   layers:
   - Default
   - TransparentFX
